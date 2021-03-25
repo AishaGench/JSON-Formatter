@@ -3,11 +3,26 @@ const buttonContainer = document.querySelector('#buttonContainer');
 const display = document.querySelector('#displayContainer');
 const collection = ["Another", "Oooops", "More", "Next", "Continue", "Keep going", "Click me", "A new one", "Try Again", "So Close", "Well Done"];
 
+const url = 'https://jsonplaceholder.typicode.com/';
 
-
-
-
-
+function getJson(item){
+	const urlToFetch = url + item;
+	fetch(urlToFetch)
+	.then(response =>{
+		if(response.ok){
+		return response.json();	
+		}else{
+			throw new Error(Something is wrong!!!)
+		}
+	} )
+	.then(jsonResponse =>{
+		console.log(jsonResponse);
+		return renderResponse(jsonResponse);
+	})
+	.catch(err =>consolelog(err))
+	
+}
+getJson("posts");
 
 
 
@@ -40,3 +55,4 @@ const renderResponse = (jsonResponse) => {
   jsonButton.innerHTML = `${collection[jsonSelection]}!`;
   display.innerHTML = `<pre>${formatJson(jsonResponse[jsonSelection])}</pre>`;
 }
+jsonButton.onclick = () => getJson3("users");
